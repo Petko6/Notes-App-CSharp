@@ -1,18 +1,18 @@
 ﻿namespace Notes_App
 {
-    internal class Poznámka
+    internal class Note
     {
-        public string Title { get; set; }
-        public string Text { get; set; }
-        public Poznámka(string title, string text)
+        public string Title { get; private set; }
+        public string Text { get; private set; }
+        public Note(string title, string text)
         {
             Title = title;
             Text = text;
         }
 
-        public Poznámka(string radek)
+        public Note(string line)
         {
-            string[] data = radek.Split(';');
+            string[] data = line.Split(';');
             Title = data[0];
             Text = data[1];
         }
@@ -22,13 +22,13 @@
             return Title;
         }
 
-        public void UpravitPoznámku(string title, string text)
+        public void EditNote(string title, string text)
         {
             Title = title;
             Text = text;
         }
 
-        public string UlozitCSV()
+        public string SaveAsCSV()
         {
             return $"{Title};{Text}";
         }

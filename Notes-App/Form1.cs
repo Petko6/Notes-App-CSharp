@@ -12,141 +12,123 @@ namespace Notes_App
             InitializeComponent();
         }
 
-        Poznámka poznámka;
+        Note note;
 
-        bool JeVybrano { get { return listBoxSeznamPoznámek.SelectedIndex != -1; } }
+        bool IsSelected { get { return listBoxNotes.SelectedIndex != -1; } }
 
         public void Add()
         {
             AddWindow addWindow = new AddWindow();
             if (addWindow.ShowDialog() == DialogResult.OK)
             {
-                listBoxSeznamPoznámek.Items.Add(new Poznámka(addWindow.Title, addWindow.NoteText));
+                listBoxNotes.Items.Add(new Note(addWindow.Title, addWindow.NoteText));
             }
         }
 
         public void Edit()
         {
             EditWindow editWindow = new EditWindow();
-            poznámka = listBoxSeznamPoznámek.SelectedItem as Poznámka;
-            if (JeVybrano)
+            if (IsSelected)
             {
-                editWindow.Title = poznámka.Title;
-                editWindow.NoteText = poznámka.Text;
+                note = listBoxNotes.SelectedItem as Note;
+                editWindow.Title = note.Title;
+                editWindow.NoteText = note.Text;
                 if (editWindow.ShowDialog() == DialogResult.OK)
-                {
-                    listBoxSeznamPoznámek.Items.Insert(listBoxSeznamPoznámek.SelectedIndex, new Poznámka(editWindow.Title, editWindow.NoteText));
-                    listBoxSeznamPoznámek.Items.RemoveAt(listBoxSeznamPoznámek.SelectedIndex);
-
-                }
+                    note.EditNote(editWindow.Title, editWindow.NoteText);
+                listBoxNotes.Items[listBoxNotes.SelectedIndex] = listBoxNotes.Items[listBoxNotes.SelectedIndex];
             }
         }
 
         public void Delete()
         {
-            if (JeVybrano)
-                listBoxSeznamPoznámek.Items.RemoveAt(listBoxSeznamPoznámek.SelectedIndex);
+            if (IsSelected)
+                listBoxNotes.Items.RemoveAt(listBoxNotes.SelectedIndex);
         }
 
         public void Open()
         {
             ViewWindow viewWindow = new ViewWindow();
-            if (JeVybrano)
-                poznámka = listBoxSeznamPoznámek.SelectedItem as Poznámka;
-            viewWindow.Text = poznámka.Title;
-            viewWindow.NoteText = poznámka.Text;
+            if (IsSelected)
+                note = listBoxNotes.SelectedItem as Note;
+            viewWindow.Text = note.Title;
+            viewWindow.NoteText = note.Text;
             viewWindow.ShowDialog();
         }
-        public void NačístSoubor(string jmenoSouboru)
+        public void LoadFile(string jmenoSouboru)
         {
             StreamReader streamreader = new StreamReader(jmenoSouboru, Encoding.UTF8);
             streamreader.ReadLine();
-            string radek;
+            string line;
             while (!streamreader.EndOfStream)
             {
-                radek = streamreader.ReadLine();
-                listBoxSeznamPoznámek.Items.Add(new Poznámka(radek));
+                line = streamreader.ReadLine();
+                listBoxNotes.Items.Add(new Note(line));
             }
             streamreader.Close();
         }
-        public void UložitSoubor(string jmenoSouboru)
+        public void SaveFile(string jmenoSouboru)
         {
             StreamWriter streamwriter = new StreamWriter(jmenoSouboru, false, Encoding.UTF8);
             streamwriter.WriteLine("title;text");
-            foreach (Poznámka produkt in listBoxSeznamPoznámek.Items)
+            foreach (Note produkt in listBoxNotes.Items)
             {
-                streamwriter.WriteLine(produkt.UlozitCSV());
+                streamwriter.WriteLine(produkt.SaveAsCSV());
             }
             streamwriter.Close();
             MessageBox.Show("Uloženo");
         }
-        private void buttonAdd_Click(object sender, EventArgs e)
+
+        private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Add();
+            LoadFile("notes.csv");
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Edit();
+            SaveFile("notes.csv");
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            Delete();
-        }
-
-
-        private void listBoxSeznamPoznámek_DoubleClick(object sender, EventArgs e)
-        {
-            Open();
-        }
-
-        private void načístToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            NačístSoubor("notes.csv");
-        }
-
-        private void uložitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UložitSoubor("notes.csv");
-        }
-
-        private void uložitJakoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Tabulkový seznam|*.csv";
             saveFileDialog.Title = "Uložit seznam poznámek";
             saveFileDialog.ShowDialog();
-            string názevSouboru = saveFileDialog.FileName;
-            UložitSoubor(názevSouboru);
+            string fileName = saveFileDialog.FileName;
+            SaveFile(fileName);
         }
 
-        private void načístJakoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Tabulkový seznam|*.csv";
             openFileDialog.Title = "Načíst seznam poznámek";
             openFileDialog.ShowDialog();
-            string názevSouboru = openFileDialog.FileName;
-            NačístSoubor(názevSouboru);
+            string fileName = openFileDialog.FileName;
+            LoadFile(fileName);
         }
 
-        private void přidatToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Add();
         }
 
-        private void upravitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Edit();
         }
 
-        private void odstranitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Delete();
         }
 
-        private void otevřítToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Open();
+        }
+
+        private void listBoxNotes_DoubleClick(object sender, EventArgs e)
         {
             Open();
         }

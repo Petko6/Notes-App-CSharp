@@ -18,7 +18,6 @@ namespace Notes_App
             if (!string.IsNullOrEmpty(NoteText) && !string.IsNullOrEmpty(Title))
                 this.DialogResult = DialogResult.OK;
             else
-                //this.DialogResult = DialogResult.Cancel;
                 MessageBox.Show("Jedno z polí je prázdné!");
         }
     }
