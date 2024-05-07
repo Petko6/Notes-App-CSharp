@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ProcházkaP-PoznámkovýBlok")]
+[assembly: AssemblyTitle("Notes-App")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SOŠ informatiky a spojů a SOU Kolín")]
-[assembly: AssemblyProduct("ProcházkaP-PoznámkovýBlok")]
-[assembly: AssemblyCopyright("Copyright © SOŠ informatiky a spojů a SOU Kolín 2024")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

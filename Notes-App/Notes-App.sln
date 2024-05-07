@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcházkaP-PoznámkovýBlok", "ProcházkaP-PoznámkovýBlok\ProcházkaP-PoznámkovýBlok.csproj", "{C375F9E5-EEC7-4F18-868A-96A72CE63E35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notes-App", "Notes-App.csproj", "{C375F9E5-EEC7-4F18-868A-96A72CE63E35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3EEA2A69-CED3-4F53-8E5E-21D760EC371C}
+		SolutionGuid = {715D7489-D937-44AD-8A1E-029BA8755663}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-﻿namespace ProcházkaP_PoznámkovýBlok
+﻿namespace Notes_App
 {
     partial class AddWindow
     {

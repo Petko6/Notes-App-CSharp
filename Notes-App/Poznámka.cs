@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcházkaP_PoznámkovýBlok
+﻿namespace Notes_App
 {
     internal class Poznámka
     {
